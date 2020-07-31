@@ -6,7 +6,7 @@ using Microsoft.Azure.WebJobs.Extensions.DurableTask;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Extensions.Logging;
 
-namespace Demos.Durable.Chaining
+namespace DurableHello.Chaining
 {
     public static class ChainSequence
     {
@@ -28,7 +28,7 @@ namespace Demos.Durable.Chaining
         [FunctionName("Chaining_SayHello")]
         public static string SayHello([ActivityTrigger] IDurableActivityContext context, ILogger log)
         {
-            string name = context.GetInput<string>();
+            var name = context.GetInput<string>();
             log.LogInformation($"Saying hello to {name}.");
             return $"Hello {name}!";
         } 
@@ -47,7 +47,7 @@ namespace Demos.Durable.Chaining
             ILogger log)
         {
             // Function input comes from the request content.
-            string instanceId = await starter.StartNewAsync("Chaining_Hello", null);
+            var instanceId = await starter.StartNewAsync("Chaining_Hello", null);
 
             log.LogInformation($"Started orchestration with ID = '{instanceId}'.");
 

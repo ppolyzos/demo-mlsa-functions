@@ -1,14 +1,14 @@
 using System.Collections.Generic;
+using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.DurableTask;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Extensions.Logging;
-using System.Net;
 using Newtonsoft.Json;
 
-namespace Demos.Durable.Monitor
+namespace DurableHello.Monitor
 {
     public static class MonitorSequence
     {
@@ -34,7 +34,7 @@ namespace Demos.Durable.Monitor
         [FunctionName("Monitor_SayHello")]
         public static string SayHello([ActivityTrigger] IDurableActivityContext context, ILogger log)
         {
-            string name = context.GetInput<string>();
+            var name = context.GetInput<string>();
             log.LogInformation($"Saying hello to {name}.");
             return $"Hello {name}!";
         }
@@ -55,18 +55,18 @@ namespace Demos.Durable.Monitor
         {
             // Function input comes from the request content.
             var eventData = await req.Content.ReadAsAsync<object>();
-            string instanceId = await starter.StartNewAsync("Monitor_Hello", eventData);
+            var instanceId = await starter.StartNewAsync("Monitor_Hello", eventData);
 
             log.LogInformation($"Started orchestration with ID = '{instanceId}'.");
 
-            DurableOrchestrationStatus durableOrchestrationStatus = await starter.GetStatusAsync(instanceId);
+            var durableOrchestrationStatus = await starter.GetStatusAsync(instanceId);
             while (durableOrchestrationStatus.CustomStatus.ToString() != "100% Completed")
             {
                 await Task.Delay(200);
                 durableOrchestrationStatus = await starter.GetStatusAsync(instanceId);
             }
 
-            HttpResponseMessage httpResponseMessage = new HttpResponseMessage(HttpStatusCode.OK)
+            var httpResponseMessage = new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new StringContent(JsonConvert.SerializeObject(durableOrchestrationStatus))
             };
@@ -83,18 +83,18 @@ namespace Demos.Durable.Monitor
         {
             // Function input comes from the request content.
             var eventData = await req.Content.ReadAsAsync<object>();
-            string instanceId = await starter.StartNewAsync("Monitor_Hello", eventData);
+            var instanceId = await starter.StartNewAsync("Monitor_Hello", eventData);
 
             log.LogInformation($"Started orchestration with ID = '{instanceId}'.");
 
-            DurableOrchestrationStatus durableOrchestrationStatus = await starter.GetStatusAsync(instanceId);
+            var durableOrchestrationStatus = await starter.GetStatusAsync(instanceId);
             while (durableOrchestrationStatus.RuntimeStatus != OrchestrationRuntimeStatus.Completed)
             {
                 await Task.Delay(200);
                 durableOrchestrationStatus = await starter.GetStatusAsync(instanceId);
             }
 
-            HttpResponseMessage httpResponseMessage = new HttpResponseMessage(HttpStatusCode.OK)
+            var httpResponseMessage = new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new StringContent(JsonConvert.SerializeObject(durableOrchestrationStatus))
             };
