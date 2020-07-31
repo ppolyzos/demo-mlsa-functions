@@ -1,0 +1,76 @@
+{
+	"info": {
+		"_postman_id": "acc49606-c25e-4769-9aec-374a115309d4",
+		"name": "06. Demos - Durable Functions",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Durable Hello",
+			"item": [
+				{
+					"name": "Start: Chaining Functions",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{FUNCTIONS_URL}}/api/orchestrators/chaining/start",
+							"host": [
+								"{{FUNCTIONS_URL}}"
+							],
+							"path": [
+								"api",
+								"orchestrators",
+								"chaining",
+								"start"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Start: Monitoring Custom Statuses",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{FUNCTIONS_URL}}/api/orchestrators/monitor/custom-status",
+							"host": [
+								"{{FUNCTIONS_URL}}"
+							],
+							"path": [
+								"api",
+								"orchestrators",
+								"monitor",
+								"custom-status"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Start: Monitoring Runtime Statuses",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{FUNCTIONS_URL}}/api/orchestrators/monitor/runtime-status",
+							"host": [
+								"{{FUNCTIONS_URL}}"
+							],
+							"path": [
+								"api",
+								"orchestrators",
+								"monitor",
+								"runtime-status"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
