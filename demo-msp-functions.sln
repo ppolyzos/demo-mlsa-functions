@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ResizeImages", "ResizeImages\ResizeImages.csproj", "{51D0827D-12AD-404A-A1E9-07FD5DE65297}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DurableHello", "DurableHello\DurableHello.csproj", "{C2479EA8-E53A-4E4A-AED8-2D7522EA6FA3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{51D0827D-12AD-404A-A1E9-07FD5DE65297}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{51D0827D-12AD-404A-A1E9-07FD5DE65297}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{51D0827D-12AD-404A-A1E9-07FD5DE65297}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2479EA8-E53A-4E4A-AED8-2D7522EA6FA3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2479EA8-E53A-4E4A-AED8-2D7522EA6FA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2479EA8-E53A-4E4A-AED8-2D7522EA6FA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2479EA8-E53A-4E4A-AED8-2D7522EA6FA3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

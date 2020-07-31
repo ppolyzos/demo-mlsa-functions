@@ -1,0 +1,21 @@
+{
+    "version": "2.0",
+    "functions": [
+        "Chaining_Hello",
+        "Chaining_SayHello",
+        "Chaining_SayHello_Direct",
+        "Chaining_Hello_HttpStart",
+        "Monitor_Hello",
+        "Monitor_SayHello",
+        "Monitor_SayHello_Direct",
+        "Monitor_Hello_HttpStart_CustomStatus",
+        "Monitor_Hello_HttpStart_RuntimeStatus"
+    ],
+    "logging": {
+        "applicationInsights": {
+            "samplingSettings": {
+                "isEnabled": true
+            }
+        }
+    }
+}
