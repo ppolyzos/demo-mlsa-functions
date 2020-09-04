@@ -23,14 +23,40 @@ namespace ResizeImages
         
         private static readonly string OutputContainer = Environment.GetEnvironmentVariable("OUTPUT_CONTAINER");
 
-        private const int ThumbnailWith = 200;
-
         [FunctionName("resize-images")]
         public static async Task RunAsync([BlobTrigger("images-to-resize/{name}.{extension}")]
             Stream myBlob, string name, string extension, ILogger log)
         {
             log.LogInformation($"C# Blob trigger function Processed blob\n Name:{name} \n Size: {myBlob.Length} Bytes");
 
+            await ResizeImage(myBlob, name, extension, log, 200);
+        }
+
+        #region extra functions
+
+        [FunctionName("resize-images-400")]
+        public static async Task RunAsyncMedium([BlobTrigger("images-to-resize/{name}.{extension}")]
+            Stream myBlob, string name, string extension, ILogger log)
+        {
+            log.LogInformation($"C# Blob trigger function Processed blob\n Name:{name} \n Size: {myBlob.Length} Bytes");
+        
+            await ResizeImage(myBlob, name, extension, log, 400);
+        }
+        
+        [FunctionName("resize-images-600")]
+        public static async Task RunAsyncLarge([BlobTrigger("images-to-resize/{name}.{extension}")]
+            Stream myBlob, string name, string extension, ILogger log)
+        {
+            log.LogInformation($"C# Blob trigger function Processed blob\n Name:{name} \n Size: {myBlob.Length} Bytes");
+        
+            await ResizeImage(myBlob, name, extension, log, 600);
+        }
+
+        #endregion
+
+        private static async Task ResizeImage(Stream myBlob, string name, string extension, ILogger log,
+            int thumbnailWidth)
+        {
             var encoder = GetEncoder(extension);
             if (encoder == null)
             {
@@ -47,16 +73,16 @@ namespace ResizeImages
 
             try
             {
-                var divisor = image.Width / ThumbnailWith;
+                var divisor = image.Width / thumbnailWidth;
                 var height = Convert.ToInt32(Math.Round((decimal) image.Height / divisor));
-                image.Mutate(x => x.Resize(ThumbnailWith, height));
+                image.Mutate(x => x.Resize(thumbnailWidth, height));
                 await image.SaveAsync(output, encoder);
                 output.Seek(0, SeekOrigin.Begin);
 
                 var blobServiceClient =
                     new BlobServiceClient(BlobStorageConnectionString);
                 var blobContainerClient = blobServiceClient.GetBlobContainerClient(OutputContainer);
-                var blobClient = blobContainerClient.GetBlobClient($"{name}-{ThumbnailWith}.{extension}");
+                var blobClient = blobContainerClient.GetBlobClient($"{name}-{thumbnailWidth}.{extension}");
 
                 await blobClient.UploadAsync(output, new BlobHttpHeaders()
                 {
@@ -69,7 +95,7 @@ namespace ResizeImages
                 throw;
             }
         }
-
+        
         private static IImageEncoder GetEncoder(string extension)
         {
             extension = extension.Replace(".", "");
