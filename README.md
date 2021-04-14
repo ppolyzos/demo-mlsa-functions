@@ -2,7 +2,7 @@
 
 ![Stateful Wokflows using Azure Durable Functions](assets/img/durable-functions-demo.jpg)
 
-This is a demo for my presentation Stateful Workflows using Azure Durable Functions in http://summeringreece.studentambassadors.gr/.
+This is a set of demos related to Azure Functions.
 
 
 # Setup 
