@@ -5,7 +5,7 @@
         <UserSecretsId>f23c131d-081d-4e8c-823c-6bcd3242b30f</UserSecretsId>
     </PropertyGroup>
     <ItemGroup>
-        <PackageReference Include="Azure.Storage.Blobs" Version="12.4.4" />
+        <PackageReference Include="Azure.Storage.Blobs" Version="12.13.0" />
         <PackageReference Include="Microsoft.Azure.WebJobs.Extensions.Storage" Version="3.0.4" />
         <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="3.0.3" />
         <PackageReference Include="SixLabors.ImageSharp" Version="1.0.0-rc0003" />
